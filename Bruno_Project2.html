@@ -1,0 +1,365 @@
+<!-- 
+    Name: Bruno Surdi Oliveira
+    Date: July 2020
+    Purpose: Project 2 - This project is about starting with a class-hierarchy design and then using that
+    design to build a simple web user interface to enable viewing and editing the
+    properties of any objects created.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Red+Rose&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Project 2</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>DEVICES</h1>
+    <br>
+    <div class="container">
+        <div class="card-deck">
+
+            <!-- VIDEO DEVICE CARD -->
+            <div class="card">
+                <div class="card-footer">
+                    <h5 class="card-title">Video Device</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" id="videoDeviceProperties">
+                        <!-- Here will be displayed all video device properties -->
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="row" style="
+                    margin-bottom: 10px">
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Previous"
+                                onclick="previous(1)"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Next"
+                                onclick="next(1);"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-success btn-sm btn-block" type="button" value="New"
+                                data-toggle="modal" data-target="#createNewVideoDevice" onclick="addNew(1)"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-warning btn-sm btn-block" type="button" value="Update"
+                                data-toggle="modal" data-target="#createNewVideoDevice"
+                                onclick="openUpdate(1, currentIndex);"><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HARD DISK CARD -->
+            <div class="card">
+                <div class="card-footer">
+                    <h5 class="card-title">Hard Disk</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" id="hardDiskProperties">
+                        <!-- Here will be displayed all hard disk properties -->
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="row" style="
+                    margin-bottom: 10px">
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Previous"
+                                onclick="previous(2);"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Next"
+                                onclick="next(2);"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-success btn-sm btn-block" type="button" value="New"
+                                data-toggle="modal" data-target="#createNewHardDisk" onclick="addNew(2);"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-warning btn-sm btn-block" type="button" value="Update"
+                                data-toggle="modal" data-target="#createNewHardDisk"
+                                onclick="openUpdate(2, currentIndexHD);"><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SSD CARD -->
+            <div class="card">
+                <div class="card-footer">
+                    <h5 class="card-title">SSD</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text" id="ssdProperties">
+                        <!-- Here will be displayed all SSD properties -->
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="row" style="
+                    margin-bottom: 10px">
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Previous"
+                                onclick="previous(3);"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-primary btn-sm btn-block" type="button" value="Next"
+                                onclick="next(3);"><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="btn btn-success btn-sm btn-block" type="button" value="New"
+                                data-toggle="modal" data-target="#createNewSSD" onclick="addNew(3);"><br>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="btn btn-warning btn-sm btn-block" type="button" value="Update"
+                                data-toggle="modal" data-target="#createNewSSD"
+                                onclick="openUpdate(3, currentIndexSSD);"><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TO ADD/ UPDATE A NEW VIDEO DEVICE -->
+    <div class="modal fade" id="createNewVideoDevice" tabindex="-1" role="dialog" aria-labelledby="newDeviceTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newDeviceTitle">New Video Device</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-md-12">
+                        <label for="replacementcost">Replacement Cost: $ </label>
+                        <input type="number" name="replacementCost" id="repCost" min="0.00"
+                        max="10000.00" step="0.01" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="suppliername">Supplier Name: </label>
+                        <input type="text" name="supplierName" id="supName" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="serialnumber">Serial Number: </label>
+                        <input type="text" name="serialNumber" id="serialNumb" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">Status:</div>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="status" id="status" class="form-control">
+                            <label class="form-check-label" for="status">
+                              Check to enable
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="resolution">Resolution: </label>
+                        <input type="text" name="resolution" id="resolution" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="inputType">Type</label>
+                        <select id="typeOfVideoDevice" class="form-control">
+                            <option value="0" disabled selected>Select a Type</option>
+                            <option value="LCD">LCD</option>
+                            <option value="LED">LED</option>
+                            <option value="Plasma">Plasma</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="createNew" class="btn btn-success" onclick="newDevice(1)"
+                        data-dismiss="modal">Create</button>
+                    <button type="button" id="updateButton" class="btn btn-warning"
+                        onclick="updateDevice(1, currentIndex)" data-dismiss="modal" hidden>Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TO ADD/UPDATE A NEW HARD DISK DEVICE -->
+    <div class="modal fade" id="createNewHardDisk" tabindex="-1" role="dialog" aria-labelledby="newDeviceTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hardDiskTitle">New Hard Disk Device</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-md-12">
+                        <label for="replacementcost">Replacement Cost: $ </label>
+                        <input type="number" name="replacementCost" id="repCostHD" class="form-control" min="0.00"
+                        max="10000.00" step="0.01">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="suppliername">Supplier Name: </label>
+                        <input type="text" name="supplierName" id="supNameHD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="serialnumber">Serial Number: </label>
+                        <input type="text" name="serialNumber" id="serialNumbHD" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">Status:</div>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="status" id="statusHD">
+                            <label class="form-check-label" for="status">
+                              Check to enable
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="size">Size: </label>
+                        <input type="text" name="size" id="sizeHD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="transferrate">Transfer Rate: </label>
+                        <input type="text" name="transferRate" id="transfRateHD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="plattersize">Platter Size: </label>
+                        <input type="text" name="platterSize" id="platSizeHD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="numberofplatters">Number of Platters: </label>
+                        <input type="text" name="numberOfPlatters" id="platNumberHD" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="createNewHD" class="btn btn-success" onclick="newDevice(2)"
+                        data-dismiss="modal">Create</button>
+                    <button type="button" id="updateButtonHD" class="btn btn-warning"
+                        onclick="updateDevice(2, currentIndexHD)" data-dismiss="modal" hidden>Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TO ADD/UPDATE A NEW SSD DEVICE -->
+    <div class="modal fade" id="createNewSSD" tabindex="-1" role="dialog" aria-labelledby="newDeviceTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ssdTitle">New SSD</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-md-12">
+                        <label for="replacementcost">Replacement Cost: $ </label>
+                        <input type="number" name="replacementCost" id="repCostSSD" class="form-control" min="0.00"
+                        max="10000.00" step="0.01">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="suppliername">Supplier Name: </label>
+                        <input type="text" name="supplierName" id="supNameSSD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="serialnumber">Serial Number: </label>
+                        <input type="text" name="serialNumber" id="serialNumbSSD" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">Status:</div>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="status" id="statusSSD">
+                            <label class="form-check-label" for="status">
+                              Check to enable
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="size">Size: </label>
+                        <input type="text" name="size" id="sizeSSD" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="size">Transfer Rate: </label>
+                        <input type="text" name="transferRate" id="transfRateSSD" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="inputType">Type</label>
+                        <select id="typeSSD" class="form-control">
+                            <option value="0" disabled selected>Select a Type</option>
+                            <option value="Flash">Flash</option>
+                            <option value="DRAM">DRAM</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="wearLeveling" id="wearLevelingSSD">
+                            <label class="form-check-label" for="status">
+                                Wear Leveling
+                            </label>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="createSSD" class="btn btn-success" onclick="newDevice(3)"
+                        data-dismiss="modal">Create</button>
+                    <button type="button" id="updateButtonSSD" class="btn btn-warning"
+                        onclick="updateDevice(3, currentIndexSSD)" data-dismiss="modal" hidden>Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+    <!-- Link to the JS file -->
+    <script src="Bruno_Project2.js"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

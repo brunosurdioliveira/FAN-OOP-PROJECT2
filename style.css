@@ -1,0 +1,27 @@
+.card-deck {
+    text-align: center;
+}
+
+body {
+    background: url('https://accoladetechnology.com/wp-content/uploads/2019/03/AdobeStock_183503207.jpeg');
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Red Rose', cursive;
+}
+
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px #ffffff;
+}
+
+.card-title {
+    font-size: x-large;
+}
+
+.card-text {
+    text-align: justify;
+}
+
+.modal-body {
+    text-align: justify;
+}
